@@ -2,17 +2,16 @@ package com.sigma.dsalgo.model.concrete;
 
 import com.sigma.dsalgo.model.interfaces.Tree;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
-    private BinarySearchTree<T> left;
-    private BinarySearchTree<T> right;
-    private BinarySearchTree<T> root;
-    private T data;
+    private Node<T> root;
 
     public BinarySearchTree(T data) {
-        this.data = data;
+        this.root = new Node<>(data);
     }
 
     @Override
@@ -20,21 +19,20 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         return search(root, data);
     }
 
-    private T search(BinarySearchTree<T> root, T data) {
+    private T search(Node<T> root, T data) {
         if (root == null) {
             return null;
         }
+
         if (data == root.data) {
             return data;
         }
         else if (data.compareTo(root.data) < 0) {
-            search(root.left, data);
+            return search(root.left, data);
         }
         else {
-            search(root.right, data);
+            return search(root.right, data);
         }
-
-        return null;
     }
 
     @Override
@@ -42,15 +40,15 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         root = insert(root, data);
     }
 
-    private BinarySearchTree<T> insert(BinarySearchTree<T> root, T data) {
+    private Node<T> insert(Node<T> root, T data) {
         if (root == null) {
-            return new BinarySearchTree<>(data);
+            return new Node<>(data);
         }
         else if (data.compareTo(root.data) < 0) {
-            root.left = insert(root, data);
+            root.left = insert(root.left, data);
         }
         else if (data.compareTo(root.data) > 0) {
-            root.right = insert(root, data);
+            root.right = insert(root.right, data);
         }
 
         return root;
@@ -62,16 +60,16 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         return root == null;
     }
 
-    private BinarySearchTree<T> delete(BinarySearchTree<T> root, T data) {
+    private Node<T> delete(Node<T> root, T data) {
         if (root == null) {
             return null;
         }
 
         if (data.compareTo(root.data) < 0) {
-            root.left = delete(root, data);
+            root.left = delete(root.left, data);
         }
         else if (data.compareTo(root.data) > 0) {
-            root.right = delete(root, data);
+            root.right = delete(root.right, data);
         }
         else {
             if (root.left == null && root.right == null) {
@@ -84,7 +82,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
                 return root.left;
             }
             else {
-                root.data = getMax(root.left);
+                root.data = getMaxFromLeftSubTree(root);
                 root.left = delete(root.left, root.data);
             }
         }
@@ -92,11 +90,15 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         return root;
     }
 
-    private T getMax(BinarySearchTree<T> left) {
-        while (root.right != null) {
-            root = root.right;
+    private T getMaxFromLeftSubTree(Node<T> root) {
+        Node<T> leftNode = root.left;
+
+        while (leftNode.right != null) {
+            leftNode = leftNode.right;
         }
 
-        return root.data;
+        return leftNode.data;
     }
+
+    //TODO ::  add pre-order, in-order and post-order iterators
 }
