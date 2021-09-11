@@ -99,6 +99,4 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
         return leftNode.data;
     }
-
-    //TODO ::  add pre-order, in-order and post-order iterators
 }
