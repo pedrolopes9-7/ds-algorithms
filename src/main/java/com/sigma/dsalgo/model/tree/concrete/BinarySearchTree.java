@@ -1,6 +1,6 @@
-package com.sigma.dsalgo.model.concrete;
+package com.sigma.dsalgo.model.tree.concrete;
 
-import com.sigma.dsalgo.model.interfaces.Tree;
+import com.sigma.dsalgo.model.tree.interfaces.Tree;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,13 +1,17 @@
-package com.sigma.dsalgo.model.concrete
+package com.sigma.dsalgo.model.tree.concrete
 
 import spock.lang.Specification
 
+import static ObjectMother.*
+
 class BinarySearchTreeTest extends Specification {
-    //TODO :: create ObjectMother style mock factory
 
     def "search - "() {
         given:
-        def tree = new BinarySearchTree(5)
+        def tree = buildBinarySearchTree(10, TreeType.INTEGER)
+
+        and:
+        tree.insert(5)
 
         when:
         def result = tree.search(5)
@@ -18,13 +22,10 @@ class BinarySearchTreeTest extends Specification {
 
     def "insert - "() {
         given:
-        def tree = new BinarySearchTree(6)
+        def tree = buildBinarySearchTree(10, TreeType.INTEGER)
 
         when:
-        tree.insert(11)
-        tree.insert(2)
-        tree.insert(4)
-        tree.insert(20)
+        tree.insert(7)
 
         and:
         def result = tree.search(7)
@@ -35,15 +36,12 @@ class BinarySearchTreeTest extends Specification {
 
     def "delete - "() {
         given:
-        def tree = new BinarySearchTree(6)
-
-        when:
-        tree.insert(7)
-        tree.insert(2)
-        tree.insert(4)
-        tree.insert(20)
+        def tree = buildBinarySearchTree(10, TreeType.INTEGER)
 
         and:
+        tree.insert(7)
+
+        when:
         tree.delete(7)
 
         and:

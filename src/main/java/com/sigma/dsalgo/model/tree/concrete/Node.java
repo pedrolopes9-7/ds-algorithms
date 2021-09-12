@@ -1,4 +1,4 @@
-package com.sigma.dsalgo.model.concrete;
+package com.sigma.dsalgo.model.tree.concrete;
 
 import lombok.Data;
 

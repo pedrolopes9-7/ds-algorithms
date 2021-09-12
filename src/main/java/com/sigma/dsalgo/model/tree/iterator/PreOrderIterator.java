@@ -1,14 +1,14 @@
-package com.sigma.dsalgo.model.iterator;
+package com.sigma.dsalgo.model.tree.iterator;
 
-import com.sigma.dsalgo.model.concrete.BinarySearchTree;
-import com.sigma.dsalgo.model.concrete.Node;
+import com.sigma.dsalgo.model.tree.concrete.BinarySearchTree;
+import com.sigma.dsalgo.model.tree.concrete.Node;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class PreOrderIterator<T extends Comparable<T>> implements Iterator<T> {
 
-    LinkedList<T> preOrderList;
+    private final LinkedList<T> preOrderList;
 
     public PreOrderIterator(BinarySearchTree<T> tree) {
         preOrderList = new LinkedList<>();

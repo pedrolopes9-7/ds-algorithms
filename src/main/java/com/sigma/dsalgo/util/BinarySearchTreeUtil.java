@@ -1,7 +1,7 @@
 package com.sigma.dsalgo.util;
 
-import com.sigma.dsalgo.model.concrete.BinarySearchTree;
-import com.sigma.dsalgo.model.concrete.Node;
+import com.sigma.dsalgo.model.tree.concrete.BinarySearchTree;
+import com.sigma.dsalgo.model.tree.concrete.Node;
 
 public class BinarySearchTreeUtil<T extends Comparable<T>> {
 

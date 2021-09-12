@@ -1,4 +1,4 @@
-import com.sigma.dsalgo.model.concrete.BinarySearchTree
+import com.sigma.dsalgo.model.tree.concrete.BinarySearchTree
 
 import java.util.concurrent.ThreadLocalRandom
 
@@ -8,7 +8,7 @@ class ObjectMother {
         INTEGER, DOUBLE, FLOAT, DATE, DATETIME, INSTANT
     }
 
-    //First value of tree for any Type will always be defaulted to 1
+    //First value of tree for any Type will always be defaulted to (maxRange - minRange) / 2
     static buildBinarySearchTree(size = 1, type = TreeType.INTEGER, minRange = 0, maxRange = 100) {
         def tree = null
 
@@ -28,9 +28,10 @@ class ObjectMother {
     }
 
     private static buildDoubleBinarySearchTree(size, minRange, maxRange) {
-        def tree = new BinarySearchTree(1)
+        def rootValue = (maxRange - minRange) / 2 as Double
+        def tree = new BinarySearchTree(rootValue)
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 1; i < size; i++) {
             def nextRandom = ThreadLocalRandom.current().nextDouble(minRange, maxRange)
             tree.insert(nextRandom)
         }
@@ -39,11 +40,12 @@ class ObjectMother {
     }
 
     private static buildFloatBinarySearchTree(size, minRange, maxRange) {
+        def rootValue = (maxRange - minRange) / 2 as Float
         Random random = new Random()
 
-        def tree = new BinarySearchTree(1.0f)
+        def tree = new BinarySearchTree(rootValue)
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 1; i < size; i++) {
             def nextRandom = minRange + random.nextFloat() * (maxRange - minRange) as Float
             tree.insert(nextRandom)
         }
@@ -52,9 +54,10 @@ class ObjectMother {
     }
 
     private static buildIntegerBinarySearchTree(size, minRange, maxRange) {
-        def tree = new BinarySearchTree(1.0)
+        def rootValue = (maxRange - minRange) / 2 as Integer
+        def tree = new BinarySearchTree(rootValue)
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 1; i < size; i++) {
             def nextRandom = ThreadLocalRandom.current().nextInt(minRange, maxRange)
             tree.insert(nextRandom)
         }
