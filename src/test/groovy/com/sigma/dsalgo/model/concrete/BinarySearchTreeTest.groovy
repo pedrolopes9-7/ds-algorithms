@@ -21,7 +21,7 @@ class BinarySearchTreeTest extends Specification {
         def tree = new BinarySearchTree(6)
 
         when:
-        tree.insert(7)
+        tree.insert(10)
         tree.insert(2)
         tree.insert(4)
         tree.insert(20)
