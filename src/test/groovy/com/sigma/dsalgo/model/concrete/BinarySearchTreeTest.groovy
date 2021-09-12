@@ -44,9 +44,12 @@ class BinarySearchTreeTest extends Specification {
         tree.insert(20)
 
         and:
+        tree.delete(7)
+
+        and:
         def result = tree.search(7)
 
         then:
-        result == 7
+        result == null
     }
 }
