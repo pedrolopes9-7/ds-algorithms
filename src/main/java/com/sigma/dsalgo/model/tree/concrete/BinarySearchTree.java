@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
-    private Node<T> root;
+    private BinaryTreeNode<T> root;
 
     public BinarySearchTree(T data) {
-        this.root = new Node<>(data);
+        this.root = new BinaryTreeNode<>(data);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         return search(root, data);
     }
 
-    private T search(Node<T> root, T data) {
+    private T search(BinaryTreeNode<T> root, T data) {
         if (root == null) {
             return null;
         }
@@ -40,9 +40,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         root = insert(root, data);
     }
 
-    private Node<T> insert(Node<T> root, T data) {
+    private BinaryTreeNode<T> insert(BinaryTreeNode<T> root, T data) {
         if (root == null) {
-            return new Node<>(data);
+            return new BinaryTreeNode<>(data);
         }
         else if (data.compareTo(root.data) < 0) {
             root.left = insert(root.left, data);
@@ -60,7 +60,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         return root == null;
     }
 
-    private Node<T> delete(Node<T> root, T data) {
+    private BinaryTreeNode<T> delete(BinaryTreeNode<T> root, T data) {
         if (root == null) {
             return null;
         }
@@ -90,13 +90,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
         return root;
     }
 
-    private T getMaxFromLeftSubTree(Node<T> root) {
-        Node<T> leftNode = root.left;
+    private T getMaxFromLeftSubTree(BinaryTreeNode<T> root) {
+        BinaryTreeNode<T> leftBinaryTreeNode = root.left;
 
-        while (leftNode.right != null) {
-            leftNode = leftNode.right;
+        while (leftBinaryTreeNode.right != null) {
+            leftBinaryTreeNode = leftBinaryTreeNode.right;
         }
 
-        return leftNode.data;
+        return leftBinaryTreeNode.data;
     }
 }

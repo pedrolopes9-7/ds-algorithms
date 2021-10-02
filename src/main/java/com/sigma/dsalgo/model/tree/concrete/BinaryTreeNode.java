@@ -3,12 +3,13 @@ package com.sigma.dsalgo.model.tree.concrete;
 import lombok.Data;
 
 @Data
-public class Node<T extends Comparable<T>> {
+public class BinaryTreeNode<T extends Comparable<T>> {
     T data;
-    Node<T> left;
-    Node<T> right;
+    BinaryTreeNode<T> left;
+    BinaryTreeNode<T> right;
+    int height;
 
-    public Node(T data){
+    public BinaryTreeNode(T data){
         this.data = data;
         this.left = null;
         this.right = null;

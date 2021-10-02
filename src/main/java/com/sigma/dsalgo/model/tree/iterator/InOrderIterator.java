@@ -1,7 +1,7 @@
 package com.sigma.dsalgo.model.tree.iterator;
 
 import com.sigma.dsalgo.model.tree.concrete.BinarySearchTree;
-import com.sigma.dsalgo.model.tree.concrete.Node;
+import com.sigma.dsalgo.model.tree.concrete.BinaryTreeNode;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,7 +15,7 @@ public class InOrderIterator<T extends Comparable<T>> implements Iterator<T> {
         inOrderTraversal(tree.getRoot());
     }
 
-    private void inOrderTraversal(Node<T> root) {
+    private void inOrderTraversal(BinaryTreeNode<T> root) {
         if (root == null){
             return;
         }
