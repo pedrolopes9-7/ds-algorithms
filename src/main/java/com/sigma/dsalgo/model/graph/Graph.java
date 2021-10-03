@@ -15,7 +15,8 @@ import java.util.concurrent.ThreadLocalRandom;
 @Data
 public class Graph {
 
-    Map<Integer, List<GraphNode>> adjacencyMap;
+    private Map<Integer, List<GraphNode>> adjacencyMap;
+    private boolean isCyclic;
     private static final int defaultVertexSize = 10;
     private static final int defaultEdgeSize = 10;
 
@@ -36,6 +37,7 @@ public class Graph {
         }
 
         Graph graph = new Graph(allEdges);
+        graph.setCyclic(false);
         eliminateMultiEdges(graph);
 
         return graph;
