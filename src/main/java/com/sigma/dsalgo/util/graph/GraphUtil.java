@@ -6,6 +6,7 @@ import com.sigma.dsalgo.model.graph.GraphNode;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,23 +24,18 @@ public class GraphUtil {
         Map<Integer, List<GraphNode>> graphAdjacencyMap = graph.getAdjacencyMap();
 
         int reverseIndexSortedArray = graphAdjacencyMap.keySet().size();
+        int nextIndex = reverseIndexSortedArray - 1;
 
         for (Integer vertex : graphAdjacencyMap.keySet()) {
             if (!visitedNodes[vertex]) {
-                List<Integer> dfsOrder = new ArrayList<>();
-                depthFirstSearch(vertex, visitedNodes, dfsOrder, graphAdjacencyMap);
-
-                for (Integer nodeInDfs : dfsOrder) {
-                    sorted.add(reverseIndexSortedArray, nodeInDfs);
-                    reverseIndexSortedArray--;
-                }
+                nextIndex = depthFirstSearch(nextIndex, vertex, visitedNodes, sorted, graphAdjacencyMap);
             }
         }
 
         return sorted;
     }
 
-    private static void depthFirstSearch(Integer vertex, boolean[] visitedNodes, List<Integer> dfsOrder, Map<Integer, List<GraphNode>> graphAdjacencyMap) {
+    private static int depthFirstSearch(int nextIndex, Integer vertex, boolean[] visitedNodes, List<Integer> sorted, Map<Integer, List<GraphNode>> graphAdjacencyMap) {
 
         visitedNodes[vertex] = true;
 
@@ -47,11 +43,12 @@ public class GraphUtil {
 
         for (GraphNode neighbor : neighborhood) {
             if (!visitedNodes[neighbor.getDestinationKey()]) {
-                depthFirstSearch(neighbor.getDestinationKey(), visitedNodes, dfsOrder, graphAdjacencyMap);
+                depthFirstSearch(nextIndex, neighbor.getDestinationKey(), visitedNodes, sorted, graphAdjacencyMap);
             }
         }
 
-        dfsOrder.add(vertex);
+        sorted.add(vertex);
+        return nextIndex - 1;
     }
 
     public static boolean hasCycle(Graph graph) {
